@@ -1,15 +1,20 @@
 <template>
+
+  <Navbar />
+
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <router-view />
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// para realizar el LazyLoad en vue como tal hay que importar defineAsyncComponent y luego usarlo para cargar el componente de forma asíncrona, lo que permite que el componente se cargue solo cuando sea necesario, mejorando así el rendimiento de la aplicación al reducir el tamaño del bundle inicial.
+import { defineAsyncComponent } from 'vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Navbar: defineAsyncComponent(() => import( /* webpackChunkName: "Navbar" */ './modules/shared/components/Navbar'))
   }
 }
 </script>
